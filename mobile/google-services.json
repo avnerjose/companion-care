@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "169028799770",
+    "project_id": "inatel-fetin",
+    "storage_bucket": "inatel-fetin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169028799770:android:eea98c5f009ee1839ef0a3",
+        "android_client_info": {
+          "package_name": "inatel.fetin.p103"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169028799770-vkac3vkrjm4msjj3jp7i7qtgt9reijke.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAP6054qjyIQU5mc3d9uh-ddun8koREits"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169028799770-vkac3vkrjm4msjj3jp7i7qtgt9reijke.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
