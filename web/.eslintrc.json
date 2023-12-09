@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:tailwindcss/recommended",
+    "prettier",
+    "@remix-run/eslint-config",
+    "@remix-run/eslint-config/node"
+  ],
+  "plugins": ["n", "import"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts"] }],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "quotes": ["error", "single"],
+    "no-param-reassign": "off",
+    "global-require": "off",
+    "no-shadow": "off",
+    "consistent-return": "off",
+    "default-case": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
+    "react/require-default-props": "off"
+  }
+}
