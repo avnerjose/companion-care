@@ -1,0 +1,22 @@
+FROM node:18
+
+WORKDIR /urs/src/app 
+
+COPY yarn.lock ./
+COPY package.json ./ 
+
+COPY ./prisma ./prisma/
+
+COPY .env ./ 
+
+COPY . .
+
+RUN yarn install 
+
+RUN yarn prisma generate
+
+RUN yarn build 
+
+EXPOSE 8000
+
+CMD ["node", "dist/main.js"]
