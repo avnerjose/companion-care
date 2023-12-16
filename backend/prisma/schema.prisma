@@ -1,0 +1,124 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // provider = "sqlite"
+}
+
+model Hospital {
+  id                 Int                 @id @default(autoincrement())
+  cnpj               String              @unique
+  name               String
+  address            String
+  specialty          String
+  doctors            Doctor[]
+  patients           Patient[]
+  sectors            Sector[]
+  hospitalProcedures HospitalProcedure[]
+}
+
+model Patient {
+  id                 Int                 @id @default(autoincrement())
+  cpf                String              @unique
+  name               String
+  dateOfBirth        DateTime
+  email              String              @unique
+  sex                String
+  phoneNumber        String
+  city               String
+  status             String
+  hospital           Hospital            @relation(fields: [hospitalId], references: [id])
+  hospitalId         Int
+  hospitalProcedures HospitalProcedure[]
+}
+
+model Doctor {
+  id                 Int                 @id @default(autoincrement())
+  cpf                String              @unique
+  name               String
+  crm                String              @unique
+  email              String              @unique
+  specialty          String
+  dateOfBirth        DateTime
+  sex                String
+  phoneNumber        String
+  city               String
+  hospital           Hospital            @relation(fields: [hospitalId], references: [id])
+  hospitalId         Int
+  hospitalProcedures HospitalProcedure[]
+}
+
+model Sector {
+  id         Int      @id @default(autoincrement())
+  name       String
+  rooms      Room[]
+  hospital   Hospital @relation(fields: [hospitalId], references: [id])
+  hospitalId Int
+}
+
+model Room {
+  id              Int              @id
+  name            String
+  sector          Sector           @relation(fields: [sectorId], references: [id])
+  sectorId        Int
+  relatedStatus   String?
+  locationRecords LocationRecord[]
+}
+
+model LocationRecord {
+  id                  Int               @id @default(autoincrement())
+  timestamp           DateTime          @default(now())
+  room                Room              @relation(fields: [roomId], references: [id])
+  hospitalProcedure   HospitalProcedure @relation(fields: [hospitalProcedureId], references: [id])
+  roomId              Int
+  hospitalProcedureId Int
+}
+
+model Companion {
+  id                 Int                 @id @default(autoincrement())
+  name               String
+  email              String
+  notificationToken  String?
+  code               VerificationCode?
+  hospitalProcedures HospitalProcedure[]
+}
+
+model HospitalProcedure {
+  id              Int              @id @default(autoincrement())
+  type            String
+  status          String
+  startDate       DateTime         @default(now())
+  doctor          Doctor           @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  patient         Patient          @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  observations    Observation[]
+  companion       Companion?       @relation(fields: [companionId], references: [id], onDelete: SetNull)
+  hospital        Hospital         @relation(fields: [hospitalId], references: [id], onDelete: Cascade)
+  locationRecords LocationRecord[]
+  doctorId        Int
+  patientId       Int
+  companionId     Int?
+  hospitalId      Int
+}
+
+model Observation {
+  id                  Int               @id @default(autoincrement())
+  type                String
+  createdAt           DateTime          @default(now())
+  content             String
+  hospitalProcedure   HospitalProcedure @relation(fields: [hospitalProcedureId], references: [id])
+  hospitalProcedureId Int
+}
+
+model VerificationCode {
+  id          Int       @id @default(autoincrement())
+  code        String
+  expiryDate  DateTime
+  companion   Companion @relation(fields: [companionId], references: [id])
+  companionId Int       @unique
+}
