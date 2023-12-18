@@ -1,21 +1,21 @@
-import type { ActionArgs, LoaderArgs } from "@remix-run/node";
-import { type ApiHospitalProcedure } from "../entities/api/ApiHospitalProcedure.ts";
-import { type Patient } from "../entities/Patient.ts";
-import { useLoaderData, useRevalidator } from "@remix-run/react";
-import { useEffect } from "react";
-import { api } from "../services/api.ts";
-import { mapApiHospitalProcedureToFrontendModel } from "../mappers/HospitalProcedure.mapper.tsx";
-import { useSocket } from "../contexts/socket.context.tsx";
-import { PatientInfo } from "../components/PatientInfo.tsx";
-import { ObservationForm } from "../components/ObservationForm.tsx";
-import { HistoryMapTabs } from "../components/HistoryMapTabs/index.tsx";
-import { ObservationsSlider } from "../components/ObservationsSlider.tsx";
+import { useEffect } from 'react';
+import type { ActionArgs, LoaderArgs } from '@remix-run/node';
+import { useLoaderData, useRevalidator } from '@remix-run/react';
+import { type ApiHospitalProcedure } from '../entities/api/ApiHospitalProcedure.ts';
+import { type Patient } from '../entities/Patient.ts';
+import { api } from '../services/api.ts';
+import { mapApiHospitalProcedureToFrontendModel } from '../mappers/HospitalProcedure.mapper.ts';
+import { useSocket } from '../contexts/socket.context.tsx';
+import { PatientInfo } from '../components/PatientInfo.tsx';
+import { ObservationForm } from '../components/ObservationForm.tsx';
+import { HistoryMapTabs } from '../components/HistoryMapTabs/index.tsx';
+import { ObservationsSlider } from '../components/ObservationsSlider.tsx';
 
 export async function loader({ params }: LoaderArgs) {
   const { patientId } = params;
   const { data: patient } = await api.get<Patient>(`/patient/${patientId}`);
   const { data: hospitalProcedures } = await api.get<ApiHospitalProcedure[]>(
-    `/hospital-procedure?patientId=${patientId}`
+    `/hospital-procedure?patientId=${patientId}`,
   );
 
   return {
@@ -29,16 +29,16 @@ export async function loader({ params }: LoaderArgs) {
 export async function action({ request }: ActionArgs) {
   const body = await request.formData();
 
-  const content = body.get("content") as string;
-  const type = body.get("type") as string;
-  const hospitalProcedureId = body.get("hospitalProcedureId") as string;
+  const content = body.get('content') as string;
+  const type = body.get('type') as string;
+  const hospitalProcedureId = body.get('hospitalProcedureId') as string;
 
   if (!content.trim() || !type.trim() || !hospitalProcedureId.trim()) {
     return null;
   }
 
   try {
-    await api.post("/observation", {
+    await api.post('/observation', {
       content,
       type,
       hospitalProcedureId: Number(hospitalProcedureId),
@@ -61,13 +61,16 @@ export default function PatientDetail() {
 
     socket.on(`patient_${patient.cpf}_update`, () => revalidator.revalidate());
     socket.on(`hospitalProcedure_${hospitalProcedure?.id}_update`, () =>
-      revalidator.revalidate()
+      revalidator.revalidate(),
     );
 
-      return () => {
+    return () => {
       socket.off(`patient_${patient.cpf}_update`, updateHandler);
       if (hospitalProcedure?.id) {
-        socket.off(`hospitalProcedure_${hospitalProcedure?.id}_update`, updateHandler);
+        socket.off(
+          `hospitalProcedure_${hospitalProcedure?.id}_update`,
+          updateHandler,
+        );
       }
     };
   }, [socket, patient.cpf, hospitalProcedure?.id, revalidator]);
