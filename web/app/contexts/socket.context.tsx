@@ -19,7 +19,7 @@ const SocketContext = createContext<SocketContextProps>(
 );
 
 export function connect() {
-  return io("https://companion-care-backend-production.up.railway.app");
+  return io(process.env.API_URL as string);
 }
 
 export function SocketProvider({ children }: PropsWithChildren) {
