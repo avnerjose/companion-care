@@ -25,3 +25,11 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@layer base {
+  input,
+  textarea,
+  select {
+    @apply bg-gray-100 !important;
+  }
+}
