@@ -26,7 +26,7 @@ export async function POST(req: Request) {
       {
         status: 200,
         headers: {
-          "Set-Cookie": `token=${data.access_token}`,
+          "Set-Cookie": `${AUTH_TOKEN_NAME}=${data.access_token}`,
         },
       }
     );
