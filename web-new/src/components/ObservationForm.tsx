@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { type HospitalProcedure } from "@/entities/HospitalProcedure";
 import { ObservationType } from "@/entities/Observation";
 import { api } from "@/services/api";
 import { Button } from "@/components/ui/button";
@@ -20,14 +19,12 @@ import {
   OBSERVATION_TYPE_TO_TEXT,
 } from "@/constants";
 import Image from "next/image";
+import { useHospitalProcedure } from "@/contexts/HospitalProcedure.context";
 
-interface ObservationFormProps {
-  hospitalProcedure: HospitalProcedure | null;
-}
-
-export function ObservationForm({ hospitalProcedure }: ObservationFormProps) {
+export function ObservationForm() {
   const [type, setType] = useState<ObservationType | undefined>();
   const [content, setContent] = useState("");
+  const { hospitalProcedure } = useHospitalProcedure();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

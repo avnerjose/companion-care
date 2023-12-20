@@ -28,8 +28,11 @@ body {
 
 @layer base {
   input,
-  textarea,
-  select {
+  textarea {
     @apply bg-gray-100 !important;
+  }
+
+  * {
+    @apply text-gray-900;
   }
 }

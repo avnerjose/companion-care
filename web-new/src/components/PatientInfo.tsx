@@ -1,10 +1,14 @@
-import { type Patient } from "@/entities/Patient";
+"use client";
 
-interface PatientInfoProps {
-  patient: Patient;
-}
+import { useHospitalProcedure } from "@/contexts/HospitalProcedure.context";
 
-export function PatientInfo({ patient }: PatientInfoProps) {
+export function PatientInfo() {
+  const { patient } = useHospitalProcedure();
+
+  if (!patient) {
+    return null;
+  }
+
   return (
     <div className="bg-white p-4 rounded-lg border-l-8 border-primary-500 self-start">
       <div className="flex justify-between">
@@ -33,7 +37,11 @@ export function PatientInfo({ patient }: PatientInfoProps) {
             <label htmlFor="" className="text-gray-700">
               Data of Birth
             </label>
-            <span>{new Intl.DateTimeFormat('pt-BR').format(new Date(patient.dateOfBirth))}</span>
+            <span>
+              {new Intl.DateTimeFormat("pt-BR").format(
+                new Date(patient.dateOfBirth)
+              )}
+            </span>
           </div>
           <div className="flex flex-col w-full gap-1">
             <label htmlFor="" className="text-gray-700">

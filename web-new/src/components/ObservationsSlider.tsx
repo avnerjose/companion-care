@@ -1,12 +1,8 @@
 "use client";
 
 import Slider from "react-slick";
-import { type Observation } from "@/entities/Observation";
 import { ObservationItem } from "./ObservationItem";
-
-interface ObservationsSliderProps {
-  observations: Observation[];
-}
+import { useHospitalProcedure } from "@/contexts/HospitalProcedure.context";
 
 const carouselConfig = {
   dots: true,
@@ -18,10 +14,16 @@ const carouselConfig = {
   adaptiveHeight: false,
 };
 
-export function ObservationsSlider({ observations }: ObservationsSliderProps) {
+export function ObservationsSlider() {
+  const { hospitalProcedure } = useHospitalProcedure();
+
+  if (!hospitalProcedure) {
+    return null;
+  }
+
   return (
     <Slider {...carouselConfig} className="h-[90%]">
-      {observations.map((observation) => (
+      {hospitalProcedure.observations.map((observation) => (
         <ObservationItem observation={observation} key={observation.id} />
       ))}
     </Slider>
