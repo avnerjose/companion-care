@@ -22,7 +22,7 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
           <ol>
             <li>
               <Link
-                href="/"
+                href="/patients"
                 className="flex items-center gap-2 px-4 py-2 text-lg text-white"
               >
                 <User size={24} />
