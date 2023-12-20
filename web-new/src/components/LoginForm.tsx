@@ -1,8 +1,11 @@
 "use client";
 
+import { FormEvent, useState } from "react";
 import { api } from "@/services/api";
 import { useToast } from "@/components/ui/use-toast";
-import { FormEvent, useState } from "react";
+import { Input } from "@/components//ui/input";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -38,22 +41,19 @@ export function LoginForm() {
         <p className="text-gray-500">
           Enter your email to log in to the platform
         </p>
-        <input
+        <Label htmlFor="email" className="sr-only">E-mail </Label>
+        <Input
+          id="email"
           type="email"
           name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          className="w-full rounded-md bg-gray-400 p-2 placeholder:text-gray-500 text-gray-700"
+          placeholder="E-mail"
         />
       </div>
-      <button
-        type="submit"
-        className="bg-primary-500 hover:bg-primary-700 w-full rounded-md px-4 py-2 font-bold text-white"
-        onClick={handleSendEmail}
-      >
+      <Button type="submit" onClick={handleSendEmail}>
         Log In
-      </button>
+      </Button>
     </form>
   );
 }
