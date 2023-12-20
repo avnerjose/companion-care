@@ -6,10 +6,10 @@ interface PatientLinkProps {
   patient: Patient;
 }
 
-export function PatientLink({patient}:PatientLinkProps) {
+export function PatientLink({ patient }: PatientLinkProps) {
   return (
     <Link
-      href={`/app/patients/${patient.id}`}
+      href={`/patients/${patient.id}`}
       key={patient.cpf}
       className="flex flex-col bg-white rounded-md p-5 cursor-pointer"
     >
