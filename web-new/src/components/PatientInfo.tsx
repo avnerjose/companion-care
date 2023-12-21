@@ -1,10 +1,10 @@
-"use client";
+import { Patient } from "@/entities/Patient";
 
-import { useHospitalProcedure } from "@/contexts/HospitalProcedure.context";
+interface PatientInfoProps {
+  patient: Patient | null;
+}
 
-export function PatientInfo() {
-  const { patient } = useHospitalProcedure();
-
+export function PatientInfo({ patient }: PatientInfoProps) {
   if (!patient) {
     return null;
   }

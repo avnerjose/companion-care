@@ -1,13 +1,13 @@
-"use client";
-
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { HistoryTab } from "./HistoryTab";
 import { MapTab } from "./MapTab";
-import { useHospitalProcedure } from "@/contexts/HospitalProcedure.context";
+import { HospitalProcedure } from "@/entities/HospitalProcedure";
 
-export function HistoryMapTabs() {
-  const { hospitalProcedure } = useHospitalProcedure();
+interface HistoryMapTabsProps {
+  hospitalProcedure: HospitalProcedure | null;
+}
 
+export function HistoryMapTabs({ hospitalProcedure }: HistoryMapTabsProps) {
   return (
     <div className="bg-white p-4 rounded-lg  self-start">
       <Tabs defaultValue="history">

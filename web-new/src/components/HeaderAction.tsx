@@ -1,15 +1,22 @@
 "use client";
-import { usePathname } from "next/navigation";
+
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { NewHospitalProcedureDialog } from "./NewHospitalProcedureDialog";
 import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useHospitalProcedure } from "@/contexts/HospitalProcedure.context";
+import { revalidatePatientsList } from "@/app/actions";
+import { HospitalProcedure } from "@/entities/HospitalProcedure";
 
-export function HeaderAction() {
-  const pathName = usePathname();
-  const isInPatientDetailPage = pathName.includes("/patients/");
-  const { hospitalProcedure } = useHospitalProcedure();
+interface HeaderActionProps {
+  patientId?: string;
+  hospitalProcedure: HospitalProcedure | null;
+}
+
+export function HeaderAction({
+  patientId,
+  hospitalProcedure,
+}: HeaderActionProps) {
+  const isInPatientDetailPage = patientId !== undefined;
 
   return (
     <div>
@@ -22,6 +29,10 @@ export function HeaderAction() {
           </DialogTrigger>
           <NewHospitalProcedureDialog />
         </Dialog>
+      )}
+
+      {!isInPatientDetailPage && (
+        <Button onClick={() => revalidatePatientsList()}>Test</Button>
       )}
     </div>
   );

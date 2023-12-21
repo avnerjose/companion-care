@@ -19,13 +19,16 @@ import {
   OBSERVATION_TYPE_TO_TEXT,
 } from "@/constants";
 import Image from "next/image";
-import { useHospitalProcedure } from "@/contexts/HospitalProcedure.context";
+import { HospitalProcedure } from "@/entities/HospitalProcedure";
+import { revalidateCurrentHospitalProcedure } from "@/app/actions";
 
-export function ObservationForm() {
+interface ObservationFormProps {
+  hospitalProcedure: HospitalProcedure | null;
+}
+
+export function ObservationForm({ hospitalProcedure }: ObservationFormProps) {
   const [type, setType] = useState<ObservationType | undefined>();
   const [content, setContent] = useState("");
-  const { hospitalProcedure, handleUpdateHospitalProcedureData } =
-    useHospitalProcedure();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -41,7 +44,7 @@ export function ObservationForm() {
         hospitalProcedureId: hospitalProcedure?.id,
       });
 
-      await handleUpdateHospitalProcedureData();
+      revalidateCurrentHospitalProcedure();
     } catch (e) {
       console.log(e);
     }

@@ -3,19 +3,15 @@ import Logo from "@/assets/icons/logo.svg";
 import Image from "next/image";
 import { User } from "lucide-react";
 import Link from "next/link";
-import { Header } from "@/components/Header";
 import { LogoutButton } from "@/components/LogoutButton";
-import { HospitalProcedureProvider } from "@/contexts/HospitalProcedure.context";
 import { UserProvider } from "@/contexts/User.context";
 import { SocketProvider } from "@/contexts/Socket.context";
 
 export default function DashboardLayout({ children }: PropsWithChildren) {
   return (
     <SocketProvider>
-      <HospitalProcedureProvider>
         <UserProvider>
-          <Header />
-          <div className="bg-[#F5F7FB] min-h-screen flex">
+          <section className="bg-[#F5F7FB] min-h-screen flex">
             <aside className="fixed top-0 left-0 bottom-0 flex flex-col items-center justify-between z-10 py-6 px-2 bg-secondary-700 rounded-tr-lg shadow-default">
               <div>
                 <Image
@@ -41,9 +37,8 @@ export default function DashboardLayout({ children }: PropsWithChildren) {
               </div>
             </aside>
             <main className="w-full ml-20 mt-20">{children}</main>
-          </div>
+          </section>
         </UserProvider>
-      </HospitalProcedureProvider>
     </SocketProvider>
   );
 }

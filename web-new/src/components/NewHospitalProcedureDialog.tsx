@@ -30,13 +30,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { useHospitalProcedure } from "@/contexts/HospitalProcedure.context";
 import { useUser } from "@/contexts/User.context";
+import { revalidateCurrentHospitalProcedure } from "@/app/actions";
 
 export function NewHospitalProcedureDialog() {
   const pathName = usePathname();
   const id = pathName.split("/").pop();
-  const { handleUpdateHospitalProcedureData } = useHospitalProcedure();
   const [type, setType] = useState<HospitalProcedureType | undefined>();
   const [companionList, setCompanionList] = useState<Companion[]>([]);
   const [selectedCompanionId, setSelectedCompanionId] = useState<number>();
@@ -63,7 +62,7 @@ export function NewHospitalProcedureDialog() {
       };
 
       await api.post("/hospital-procedure", data);
-      await handleUpdateHospitalProcedureData();
+      revalidateCurrentHospitalProcedure();
     } catch (e) {
       console.log(e);
     }

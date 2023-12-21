@@ -17,7 +17,9 @@ export async function GET() {
 
   const { value } = token;
   const decodedJWT = jwt.decode(value);
-  const { data } = await api.get<Doctor>(`/doctor/${decodedJWT?.sub}`);
+  const { data } = await api.get<Doctor>(
+    `/doctor/${parseInt(decodedJWT?.sub as string)}`
+  );
 
   return new Response(JSON.stringify(data), {
     status: 200,

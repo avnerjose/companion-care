@@ -2,7 +2,7 @@
 
 import Slider from "react-slick";
 import { ObservationItem } from "./ObservationItem";
-import { useHospitalProcedure } from "@/contexts/HospitalProcedure.context";
+import { Observation } from "@/entities/Observation";
 
 const carouselConfig = {
   dots: true,
@@ -14,16 +14,18 @@ const carouselConfig = {
   adaptiveHeight: false,
 };
 
-export function ObservationsSlider() {
-  const { hospitalProcedure } = useHospitalProcedure();
+interface ObservationsSliderProps {
+  observations: Observation[];
+}
 
-  if (!hospitalProcedure) {
+export function ObservationsSlider({ observations }: ObservationsSliderProps) {
+  if (!observations.length) {
     return null;
   }
 
   return (
     <Slider {...carouselConfig} className="h-[90%]">
-      {hospitalProcedure.observations.map((observation) => (
+      {observations.map((observation) => (
         <ObservationItem observation={observation} key={observation.id} />
       ))}
     </Slider>

@@ -13,7 +13,7 @@ import {
   OBSERVATION_TYPE_TO_TEXT,
 } from "@/constants";
 import Image from "next/image";
-import { useHospitalProcedure } from "@/contexts/HospitalProcedure.context";
+import { revalidateCurrentHospitalProcedure } from "@/app/actions";
 
 interface ObservationItemProps {
   observation: Observation;
@@ -22,12 +22,11 @@ interface ObservationItemProps {
 export function ObservationItem({
   observation: { type, content, id },
 }: ObservationItemProps) {
-  const { handleUpdateHospitalProcedureData } = useHospitalProcedure();
 
   const handleDeleteObservation = async () => {
     try {
       await api.delete(`/observation/${id}`);
-      await handleUpdateHospitalProcedureData();
+      revalidateCurrentHospitalProcedure();
     } catch (e) {
       console.log(e);
     }
