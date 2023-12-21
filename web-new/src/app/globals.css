@@ -36,3 +36,7 @@ body {
     @apply text-gray-900;
   }
 }
+
+.slick-track {
+  margin-left: 0 !important;
+}

@@ -37,14 +37,14 @@ export function MapTab({ locationRecords }: MapTabProps) {
       {(mostRecentLocationId || mostRecentLocationId === 0) && (
         <div className="flex">
           <div>
-            <span className="text-sm text-gray-500">Setor:</span>
+            <span className="text-sm text-gray-500">Sector:</span>
             <span className="text-sm text-secondary-500 font-bold ml-1">
               {rooms[mostRecentLocationId]?.sector.name}
             </span>
           </div>{" "}
           |{" "}
           <div>
-            <span className="text-sm text-gray-500">Quarto:</span>
+            <span className="text-sm text-gray-500">Room:</span>
             <span className="text-sm text-secondary-500 font-bold ml-1">
               {rooms[mostRecentLocationId]?.name}
             </span>

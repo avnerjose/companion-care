@@ -12,6 +12,8 @@ import {
   OBSERVATION_TYPE_TO_ICON,
   OBSERVATION_TYPE_TO_TEXT,
 } from "@/constants";
+import Image from "next/image";
+import { useHospitalProcedure } from "@/contexts/HospitalProcedure.context";
 
 interface ObservationItemProps {
   observation: Observation;
@@ -20,9 +22,12 @@ interface ObservationItemProps {
 export function ObservationItem({
   observation: { type, content, id },
 }: ObservationItemProps) {
+  const { handleUpdateHospitalProcedureData } = useHospitalProcedure();
+
   const handleDeleteObservation = async () => {
     try {
       await api.delete(`/observation/${id}`);
+      await handleUpdateHospitalProcedureData();
     } catch (e) {
       console.log(e);
     }
@@ -33,7 +38,7 @@ export function ObservationItem({
       <div className="border-2 border-primary-500 rounded-lg">
         <header className="bg-primary-500 p-2 px-4 text-white font-bold flex items-center justify-between gap-2">
           <div className="flex gap-2">
-            <img
+            <Image
               className="w-5"
               src={OBSERVATION_TYPE_TO_ICON[type]}
               alt={OBSERVATION_TYPE_TO_TEXT[type] + " icon"}
@@ -47,7 +52,7 @@ export function ObservationItem({
             <DropdownMenuContent>
               <DropdownMenuItem onClick={handleDeleteObservation}>
                 <Trash className="mr-2 h-4 w-4" />
-                <span>Deletar</span>
+                <span>Delete</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

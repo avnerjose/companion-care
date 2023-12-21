@@ -24,7 +24,8 @@ import { useHospitalProcedure } from "@/contexts/HospitalProcedure.context";
 export function ObservationForm() {
   const [type, setType] = useState<ObservationType | undefined>();
   const [content, setContent] = useState("");
-  const { hospitalProcedure } = useHospitalProcedure();
+  const { hospitalProcedure, handleUpdateHospitalProcedureData } =
+    useHospitalProcedure();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -39,6 +40,8 @@ export function ObservationForm() {
         type,
         hospitalProcedureId: hospitalProcedure?.id,
       });
+
+      await handleUpdateHospitalProcedureData();
     } catch (e) {
       console.log(e);
     }

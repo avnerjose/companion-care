@@ -12,9 +12,9 @@ export function LocationRecordsTable({
     <table className="w-full">
       <thead>
         <tr>
-          <th className="text-start text-gray-700 font-normal">Data/Hora</th>
-          <th className="text-start text-gray-700 font-normal">Setor</th>
-          <th className="text-start text-gray-700 font-normal">Sala</th>
+          <th className="text-start text-gray-700 font-normal">Date/Time</th>
+          <th className="text-start text-gray-700 font-normal">Sector</th>
+          <th className="text-start text-gray-700 font-normal">Room</th>
         </tr>
       </thead>
       <tbody>
