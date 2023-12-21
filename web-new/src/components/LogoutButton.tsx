@@ -24,7 +24,7 @@ export function LogoutButton() {
 
   return (
     <button>
-      <LogOut className="text-white" onClick={handleLogout} size={24} />
+      <LogOut className="stroke-white" onClick={handleLogout} size={24} />
     </button>
   );
 }

@@ -14,7 +14,7 @@ export function PatientLink({ patient }: PatientLinkProps) {
       className="flex flex-col bg-white rounded-md p-5 cursor-pointer"
     >
       <div className="flex items-center">
-        <UserCircle size={64} className="text-primary-500" />
+        <UserCircle size={64} className="stroke-primary-500" />
       </div>
       <h3 className="text-xl font-bold text-gray-900">{patient.name}</h3>
       <div className="flex flex-col w-full">
