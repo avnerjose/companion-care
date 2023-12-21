@@ -6,6 +6,8 @@ import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { revalidatePatientsList } from "@/app/actions";
 import { HospitalProcedure } from "@/entities/HospitalProcedure";
+import { usePathname } from "next/navigation";
+import { NewPatientDialog } from "./NewPatientDialog";
 
 interface HeaderActionProps {
   patientId?: string;
@@ -16,6 +18,7 @@ export function HeaderAction({
   patientId,
   hospitalProcedure,
 }: HeaderActionProps) {
+  const pathName = usePathname();
   const isInPatientDetailPage = patientId !== undefined;
 
   return (
@@ -31,8 +34,15 @@ export function HeaderAction({
         </Dialog>
       )}
 
-      {!isInPatientDetailPage && (
-        <Button onClick={() => revalidatePatientsList()}>Test</Button>
+      {!isInPatientDetailPage && pathName.includes("/patients") && (
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button onClick={() => revalidatePatientsList()}>
+              Register new patient
+            </Button>
+          </DialogTrigger>
+          <NewPatientDialog />
+        </Dialog>
       )}
     </div>
   );

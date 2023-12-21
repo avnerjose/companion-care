@@ -1,6 +1,8 @@
 import * as React from "react";
+import { MaskProps, useMask } from "@react-input/mask";
 
 import { cn } from "@/lib/utils";
+import { Saira_Extra_Condensed } from "next/font/google";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
@@ -20,6 +22,17 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     );
   }
 );
+
+interface MaskedInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  maskProps: MaskProps;
+}
+
+const MaskedInput = ({ maskProps, ...props }: MaskedInputProps) => {
+  const inputRef = useMask(maskProps);
+
+  return <Input ref={inputRef} {...props} />;
+};
+
 Input.displayName = "Input";
 
-export { Input };
+export { Input, MaskedInput };
