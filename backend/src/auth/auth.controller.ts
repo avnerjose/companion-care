@@ -62,10 +62,7 @@ export class AuthController {
     @Body('notificationToken') notificationToken: string,
   ) {
     try {
-      console.log(email, code, notificationToken);
       const companion = await this.authService.validateCompanion(email);
-
-      console.log(companion)
 
       await this.authService.validateCompanionCode(email, code);
       await this.companionService.addNotificationToken(
