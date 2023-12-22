@@ -272,11 +272,14 @@ export function NewPatientDialog() {
                   <PopoverContent className="w-full p-0">
                     <Calendar
                       mode="single"
+                      captionLayout="dropdown-buttons"
                       selected={field.value}
                       onSelect={field.onChange}
                       disabled={(date) =>
                         date > new Date() || date < new Date("1900-01-01")
                       }
+                      fromYear={1960}
+                      toYear={2030}
                       initialFocus
                     />
                   </PopoverContent>
