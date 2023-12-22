@@ -1,3 +1,4 @@
+import { HospitalProcedureType } from "./HospitalProcedure";
 import type { Observation } from "./Observation";
 
 type ApiLocationRecord = {
@@ -19,7 +20,7 @@ type ApiLocationRecord = {
 
 export type ApiHospitalProcedure = {
   id: number;
-  type: string;
+  type: HospitalProcedureType;
   status: string;
   startDate: string;
   doctorCpf: string;

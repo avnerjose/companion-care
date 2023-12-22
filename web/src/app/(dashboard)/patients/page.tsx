@@ -9,7 +9,7 @@ export default async function PatientsListPage() {
     <>
       <Header />
       <div className="grid grid-cols-5 gap-2 p-2">
-        {patients.map((patient) => (
+        {patients?.map((patient) => (
           <PatientLink patient={patient} key={patient.id} />
         ))}
       </div>

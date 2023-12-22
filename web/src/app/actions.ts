@@ -26,7 +26,7 @@ export const fetchCurrentHospitalProcedure = async (patientId: string) => {
     }
   );
 
-  const hospitalProcedure = hospitalProcedures.length
+  const hospitalProcedure = hospitalProcedures?.length
     ? mapApiHospitalProcedureToFrontendModel(hospitalProcedures[0])
     : null;
 
