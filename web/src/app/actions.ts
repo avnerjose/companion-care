@@ -1,6 +1,7 @@
 "use server";
 
 import { ApiHospitalProcedure } from "@/entities/ApiHospitalProcedure";
+import { Hospital } from "@/entities/Hospital";
 import { Patient } from "@/entities/Patient";
 import { mapApiHospitalProcedureToFrontendModel } from "@/mappers/HospitalProcedure.mapper";
 import { remoteApi } from "@/services/remote-api";
@@ -44,3 +45,6 @@ export const fetchPatientsList = async () =>
   });
 
 export const revalidatePatientsList = () => revalidateTag("patients-list");
+
+export const fetchHospitalList = async () =>
+  await remoteApi<Hospital[]>("/hospital");

@@ -2,7 +2,6 @@ import * as React from "react";
 import { MaskProps, useMask } from "@react-input/mask";
 
 import { cn } from "@/lib/utils";
-import { Saira_Extra_Condensed } from "next/font/google";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
