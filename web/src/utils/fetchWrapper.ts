@@ -3,7 +3,12 @@ export const fetchWrapper = async <T = unknown>(
   input: URL | RequestInfo,
   init?: RequestInit | undefined
 ): Promise<T | undefined> => {
-  const res = await fetch(`${baseUrl}${input}`, init);
+  const res = await fetch(`${baseUrl}${input}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    ...init,
+  });
 
   if (!res.ok) {
     const error = new Error("An error occurred while fetching the data.");

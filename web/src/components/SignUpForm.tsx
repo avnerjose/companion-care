@@ -34,6 +34,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const signUpFormSchema = z.object({
   name: z.string({
@@ -117,9 +118,6 @@ export function SignUpForm({ hospitalList }: SignUpFormProps) {
       };
 
       await remoteApi("/doctor", {
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify(data),
         method: "POST",
       });
@@ -155,112 +153,157 @@ export function SignUpForm({ hospitalList }: SignUpFormProps) {
   };
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-4 px-4"
-      >
-        <div className="flex flex-col gap-1">
-          <p className="text-gray-500">
-            Enter your credentials to create your account
-          </p>
+    <>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-4 px-4"
+        >
+          <div className="flex flex-col gap-1">
+            <p className="text-gray-500">
+              Enter your credentials to create your account
+            </p>
 
-          <div className="flex gap-2">
+            <div className="flex gap-2">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name: </FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>E-mail: </FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={form.control}
-              name="name"
+              name="hospitalId"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name: </FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
+                  <FormLabel>Hospital</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={String(field.value)}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select an hospital" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {hospitalList.map(({ id, name }) => (
+                        <SelectItem key={id} value={String(id)}>
+                          {name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>E-mail: </FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
-          <FormField
-            control={form.control}
-            name="hospitalId"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Hospital</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={String(field.value)}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select an hospital" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {hospitalList.map(({ id, name }) => (
-                      <SelectItem value={String(id)}>{name}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="flex gap-2">
-            <FormField
-              control={form.control}
-              name="city"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>City: </FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="flex gap-2">
+              <FormField
+                control={form.control}
+                name="city"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>City: </FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="specialty"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Specialty: </FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+              <FormField
+                control={form.control}
+                name="specialty"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Specialty: </FormLabel>
+                    <FormControl>
+                      <Input {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
-          <div className="flex gap-2">
+            <div className="flex gap-2">
+              <FormField
+                control={form.control}
+                name="cpf"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>CPF: </FormLabel>
+                    <FormControl>
+                      <MaskedInput
+                        {...field}
+                        maskProps={{
+                          showMask: true,
+                          mask: "___.___.___-__",
+                          replacement: { _: /\d/ },
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="crm"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>CRM: </FormLabel>
+                    <FormControl>
+                      <MaskedInput
+                        {...field}
+                        maskProps={{
+                          showMask: true,
+                          separate: true,
+                          mask: "CRM/##-______",
+                          replacement: { "#": /[A-Z]/i, _: /\d/ },
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={form.control}
-              name="cpf"
+              name="phoneNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>CPF: </FormLabel>
+                  <FormLabel>Phone number: </FormLabel>
                   <FormControl>
                     <MaskedInput
                       {...field}
                       maskProps={{
                         showMask: true,
-                        mask: "___.___.___-__",
+                        mask: "(__) 9____-____",
                         replacement: { _: /\d/ },
                       }}
                     />
@@ -271,117 +314,82 @@ export function SignUpForm({ hospitalList }: SignUpFormProps) {
             />
             <FormField
               control={form.control}
-              name="crm"
+              name="sex"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>CRM: </FormLabel>
+                  <FormLabel>Gender: </FormLabel>
                   <FormControl>
-                    <MaskedInput
-                      {...field}
-                      maskProps={{
-                        showMask: true,
-                        separate: true,
-                        mask: "CRM/##-______",
-                        replacement: { "#": /[A-Z]/i, _: /\d/ },
-                      }}
-                    />
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="flex space-x-1"
+                    >
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="M" />
+                        </FormControl>
+                        <FormLabel className="font-normal">Male</FormLabel>
+                      </FormItem>
+                      <FormItem className="flex items-center space-x-3 space-y-0">
+                        <FormControl>
+                          <RadioGroupItem value="F" />
+                        </FormControl>
+                        <FormLabel className="font-normal">Female</FormLabel>
+                      </FormItem>
+                    </RadioGroup>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+            <FormField
+              control={form.control}
+              name="dateOfBirth"
+              render={({ field }) => (
+                <FormItem className="w-ful">
+                  <FormLabel>Date of birth: </FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl className="w-full">
+                        <Button className="w-full pl-3 text-left text-gray-900 font-normal bg-gray-100 hover:bg-gray-200/80">
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-full p-0">
+                      <Calendar
+                        mode="single"
+                        captionLayout="dropdown-buttons"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date > new Date() || date < new Date("1900-01-01")
+                        }
+                        fromYear={1960}
+                        toYear={2030}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
-          <FormField
-            control={form.control}
-            name="phoneNumber"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Phone number: </FormLabel>
-                <FormControl>
-                  <MaskedInput
-                    {...field}
-                    maskProps={{
-                      showMask: true,
-                      mask: "(__) 9____-____",
-                      replacement: { _: /\d/ },
-                    }}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="sex"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Gender: </FormLabel>
-                <FormControl>
-                  <RadioGroup
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    className="flex space-x-1"
-                  >
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="M" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Male</FormLabel>
-                    </FormItem>
-                    <FormItem className="flex items-center space-x-3 space-y-0">
-                      <FormControl>
-                        <RadioGroupItem value="F" />
-                      </FormControl>
-                      <FormLabel className="font-normal">Female</FormLabel>
-                    </FormItem>
-                  </RadioGroup>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="dateOfBirth"
-            render={({ field }) => (
-              <FormItem className="w-ful">
-                <FormLabel>Date of birth: </FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl className="w-full">
-                      <Button className="w-full pl-3 text-left text-gray-900 font-normal bg-gray-100 hover:bg-gray-200/80">
-                        {field.value ? (
-                          format(field.value, "PPP")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-full p-0">
-                    <Calendar
-                      mode="single"
-                      captionLayout="dropdown-buttons"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) =>
-                        date > new Date() || date < new Date("1900-01-01")
-                      }
-                      fromYear={1960}
-                      toYear={2030}
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        <Button type="submit">Log In</Button>
-      </form>
-    </Form>
+          <Button type="submit">Log In</Button>
+        </form>
+      </Form>
+      <div className="flex items-center gap-2">
+        <p>Already has an account?</p>
+        <Link href="/login" className="text-primary-500 font-bold">
+          Login to an existing account
+        </Link>
+      </div>
+    </>
   );
 }

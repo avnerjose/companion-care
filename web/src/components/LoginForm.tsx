@@ -1,24 +1,47 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { api } from "@/services/api";
 import { useToast } from "@/components/ui/use-toast";
 import { Input } from "@/components//ui/input";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "./ui/form";
+import { remoteApi } from "@/services/remote-api";
+import Link from "next/link";
+
+const loginFormSchema = z.object({
+  email: z
+    .string({
+      required_error: "E-mail is required",
+    })
+    .email({
+      message: "Invalid e-mail",
+    }),
+});
+
+type LoginFormType = z.infer<typeof loginFormSchema>;
 
 export function LoginForm() {
-  const [email, setEmail] = useState("");
   const { toast } = useToast();
+  const form = useForm<LoginFormType>({
+    resolver: zodResolver(loginFormSchema),
+  });
 
-  const handleSendEmail = async (e: FormEvent) => {
-    e.preventDefault();
-
-    if (!email.trim()) return;
-
+  const onSubmit = async (values: LoginFormType) => {
     try {
-      await api.post("/auth/login", {
-        destination: email,
+      await remoteApi("/auth/login", {
+        method: "POST",
+        body: JSON.stringify({
+          destination: values.email,
+        }),
       });
       toast({
         title: "E-mail successfully verified!",
@@ -31,29 +54,44 @@ export function LoginForm() {
         variant: "destructive",
       });
     } finally {
-      setEmail("");
+      form.reset({
+        email: "",
+      });
     }
   };
 
   return (
-    <form onSubmit={handleSendEmail} className="flex flex-col gap-4">
-      <div className="flex flex-col gap-1">
-        <p className="text-gray-500">
-          Enter your email to log in to the platform
-        </p>
-        <Label htmlFor="email" className="sr-only">E-mail </Label>
-        <Input
-          id="email"
-          type="email"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail"
-        />
+    <>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="flex flex-col gap-4 px-4 w-full"
+        >
+          <div className="flex flex-col gap-1">
+            <p className="text-gray-500">
+              Enter your email to log in to the platform
+            </p>
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>E-mail: </FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <Button type="submit">Log In</Button>
+        </form>
+      </Form>
+      <div className="flex items-center gap-2">
+        <p>Don't have an account?</p>
+        <Link href="/sign-up" className="text-primary-500 font-bold">Create a new account</Link>
       </div>
-      <Button type="submit" onClick={handleSendEmail}>
-        Log In
-      </Button>
-    </form>
+    </>
   );
 }
