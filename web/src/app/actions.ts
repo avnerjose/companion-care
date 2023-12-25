@@ -7,6 +7,10 @@ import { mapApiHospitalProcedureToFrontendModel } from "@/mappers/HospitalProced
 import { remoteApi } from "@/services/remote-api";
 import { revalidateTag } from "next/cache";
 
+export const fakeLoading = async () => {
+  await new Promise((resolve) => setTimeout(resolve, 10000));
+};
+
 export const fetchPatient = async (id: string) => {
   return await remoteApi<Patient>(`/patient/${id}`, {
     next: {

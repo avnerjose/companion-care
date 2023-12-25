@@ -89,8 +89,10 @@ export function LoginForm() {
         </form>
       </Form>
       <div className="flex items-center gap-2">
-        <p>Don't have an account?</p>
-        <Link href="/sign-up" className="text-primary-500 font-bold">Create a new account</Link>
+        <p>Don&apos;t have an account?</p>
+        <Link href="/sign-up" className="text-primary-500 font-bold">
+          Create a new account
+        </Link>
       </div>
     </>
   );
