@@ -26,10 +26,10 @@ export function DoctorInformation({ doctor }: DoctorInformationProps) {
             />
           </View>
         )}
-        <Text style={styles.title}>Médico </Text>
+        <Text style={styles.title}>Doctor </Text>
       </View>
       <View style={styles.row}>
-        <Text style={styles.boldText}>Nome:</Text>
+        <Text style={styles.boldText}>Name:</Text>
         <Text style={styles.regularText}>{doctor?.name}</Text>
       </View>
       <View style={styles.row}>
@@ -37,7 +37,7 @@ export function DoctorInformation({ doctor }: DoctorInformationProps) {
         <Text style={styles.regularText}>{doctor?.crm}</Text>
       </View>
       <View style={styles.row}>
-        <Text style={styles.boldText}>Especialidade:</Text>
+        <Text style={styles.boldText}>Specialty:</Text>
         <Text style={styles.regularText}>{doctor?.specialty}</Text>
       </View>
     </View>

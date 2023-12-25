@@ -15,7 +15,7 @@ export function LocationHistoryList({
 }: LocationHistoryListProps) {
   const [refreshing, setRefreshing] = useState(false);
   const { fetchHospitalProcedureData } = useHospitalProcedure();
-  
+
   const onRefresh = () => {
     setRefreshing(true);
     fetchHospitalProcedureData();
@@ -24,7 +24,7 @@ export function LocationHistoryList({
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Histórico de Localização</Text>
+      <Text style={styles.title}>Location History</Text>
       <FlatList
         data={locationRecords.sort(
           (a, b) => +new Date(b.timestamp) - +new Date(a.timestamp)

@@ -47,13 +47,13 @@ export function LocationHistoryItem({
         </Text>
         <View>
           <View style={styles.row}>
-            <Text style={styles.boldText}>Setor:</Text>
+            <Text style={styles.boldText}>Sector:</Text>
             <Text style={styles.regularText}>
               {locationRecord.sectorName ?? "-"}
             </Text>
           </View>
           <View style={styles.row}>
-            <Text style={styles.boldText}>Sala:</Text>
+            <Text style={styles.boldText}>Room:</Text>
             <Text style={styles.regularText}>
               {locationRecord.roomName ?? "-"}
             </Text>

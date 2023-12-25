@@ -42,7 +42,7 @@ export default function Layout() {
       <Tabs.Screen
         name="observations"
         options={{
-          title: "Observações",
+          title: "Observations",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="search" color={color} size={size} />
           ),
@@ -51,7 +51,7 @@ export default function Layout() {
       <Tabs.Screen
         name="(top-tabs)"
         options={{
-          title: "Localização",
+          title: "Location",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="map-outline" color={color} size={size} />
           ),

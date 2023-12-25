@@ -1,6 +1,5 @@
-import { IconButton } from "@/components/IconButton";
 import { router, useLocalSearchParams } from "expo-router";
-import { ChangeEvent, useEffect, useReducer, useRef, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -99,8 +98,8 @@ export default function VerifyCode() {
         style={styles.logo}
         source={require("../../../assets/images/companion_care_logo.png")}
       />
-      <Text style={styles.title}>Verifique seu e-mail</Text>
-      <Text style={styles.subtitle}>Digite o código enviado por e-mail</Text>
+      <Text style={styles.title}>Check your e-mail</Text>
+      <Text style={styles.subtitle}>Type the code sent on your e-mail</Text>
       <View style={styles.textInputs}>
         {[...new Array(6)].map((_, idx) => {
           const isFocused = inputRefs.current[idx]?.isFocused();
@@ -144,7 +143,7 @@ export default function VerifyCode() {
       </View>
 
       <TouchableOpacity style={styles.loginButton} onPress={handleVerifyCode}>
-        <Text style={styles.loginButtonText}>Fazer Login</Text>
+        <Text style={styles.loginButtonText}>Login</Text>
         {isLoading ? (
           <ActivityIndicator color="white" size={24} />
         ) : (

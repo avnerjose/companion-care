@@ -19,7 +19,7 @@ export function HospitalInformation({ hospital }: HospitalInformationProps) {
         <Text style={styles.title}>Hospital</Text>
       </View>
       <View style={styles.row}>
-        <Text style={styles.boldText}>Nome:</Text>
+        <Text style={styles.boldText}>Name:</Text>
         <Text style={styles.regularText}>{hospital?.name}</Text>
       </View>
       <View style={styles.row}>
@@ -27,7 +27,7 @@ export function HospitalInformation({ hospital }: HospitalInformationProps) {
         <Text style={styles.regularText}>{hospital?.cnpj}</Text>
       </View>
       <View style={styles.row}>
-        <Text style={styles.boldText}>Endereço:</Text>
+        <Text style={styles.boldText}>Address:</Text>
         <Text style={styles.regularText}>{hospital?.address}</Text>
       </View>
     </View>

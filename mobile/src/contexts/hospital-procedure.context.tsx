@@ -39,9 +39,8 @@ export function HospitalProcedureProvider({ children }: PropsWithChildren) {
   const [hospital, setHospital] = useState<Hospital>();
   const [locationRecords, setLocationRecords] = useState<LocationRecord[]>([]);
   const [observations, setObservations] = useState<Observation[]>([]);
-  const [hospitalProcedure, setHospitalProcedure] = useState<
-    HospitalProcedure
-  >();
+  const [hospitalProcedure, setHospitalProcedure] =
+    useState<HospitalProcedure>();
 
   const fetchHospitalProcedureData = async () => {
     const { data: hospitalProcedure } = await api.get<ApiHospitalProcedure>(
@@ -57,9 +56,8 @@ export function HospitalProcedureProvider({ children }: PropsWithChildren) {
       `/hospital/${hospitalProcedure.hospitalId}`
     );
 
-    const mappedHospitalProcedure = mapApiHospitalProcedureToFrontendModel(
-      hospitalProcedure
-    );
+    const mappedHospitalProcedure =
+      mapApiHospitalProcedureToFrontendModel(hospitalProcedure);
 
     setPatient(patient);
     setDoctor(doctor);

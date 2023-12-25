@@ -25,8 +25,8 @@ export default function Layout() {
         animationEnabled: false,
       }}
     >
-      <Tab.Screen name="Histórico" component={HistoryScreen} />
-      <Tab.Screen name="Mapa" component={HospitalMapScreen} />
+      <Tab.Screen name="History" component={HistoryScreen} />
+      <Tab.Screen name="Map" component={HospitalMapScreen} />
     </Tab.Navigator>
   );
 }

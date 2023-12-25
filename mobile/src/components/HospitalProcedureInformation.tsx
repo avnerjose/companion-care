@@ -18,14 +18,14 @@ export function HospitalProcedureInformation({
             source={require("../../assets/images/hospital-procedure-icon.png")}
           />
         )}
-        <Text style={styles.title}>Consulta médica</Text>
+        <Text style={styles.title}>Medical Procedure</Text>
       </View>
       <View style={styles.row}>
-        <Text style={styles.boldText}>Tipo:</Text>
+        <Text style={styles.boldText}>Type:</Text>
         <Text style={styles.regularText}>{hospitalProcedure?.type}</Text>
       </View>
       <View style={styles.row}>
-        <Text style={styles.boldText}>Data de início:</Text>
+        <Text style={styles.boldText}>Start date:</Text>
         <Text style={styles.regularText}>
           {hospitalProcedure && (
             <>

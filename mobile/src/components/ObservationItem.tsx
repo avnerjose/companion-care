@@ -10,9 +10,9 @@ interface ObservationItemProps {
 }
 
 const TYPE_TO_TEXT = {
-  [ObservationType.NUTRITION]: "Restrição alimentar",
-  [ObservationType.RECOMMENDATION]: "Recomendação",
-  [ObservationType.MEDICINE]: "Medicamentos",
+  [ObservationType.NUTRITION]: "Food restriction",
+  [ObservationType.RECOMMENDATION]: "Recommendation",
+  [ObservationType.MEDICINE]: "Medicines",
 };
 
 const TYPE_TO_ICON = {

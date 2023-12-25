@@ -18,10 +18,10 @@ export function PatientInformation({ patient }: PatientInformationProps) {
             source={patient.sex === "M" ? MalePatientIcon : FemalePatientIcon}
           />
         )}
-        <Text style={styles.title}>Paciente</Text>
+        <Text style={styles.title}>Patient</Text>
       </View>
       <View style={styles.row}>
-        <Text style={styles.boldText}>Nome:</Text>
+        <Text style={styles.boldText}>Name:</Text>
         <Text style={styles.regularText}>{patient?.name ?? "-"}</Text>
       </View>
       <View style={styles.row}>
@@ -29,7 +29,7 @@ export function PatientInformation({ patient }: PatientInformationProps) {
         <Text style={styles.regularText}>{patient?.status ?? "-"}</Text>
       </View>
       <View style={styles.row}>
-        <Text style={styles.boldText}>Data de nascimento:</Text>
+        <Text style={styles.boldText}>Date of birth:</Text>
         <Text style={styles.regularText}>
           {patient?.dateOfBirth
             ? new Date(patient?.dateOfBirth).toLocaleDateString()
@@ -37,7 +37,7 @@ export function PatientInformation({ patient }: PatientInformationProps) {
         </Text>
       </View>
       <View style={styles.row}>
-        <Text style={styles.boldText}>Sexo:</Text>
+        <Text style={styles.boldText}>Gender:</Text>
         <Text style={styles.regularText}>{patient?.sex ?? "-"}</Text>
       </View>
     </View>

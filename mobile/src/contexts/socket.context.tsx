@@ -17,11 +17,11 @@ const SocketContext = createContext<SocketContextProps>(
   {} as SocketContextProps
 );
 
-const prodURL = "https://companion-care-backend-production.up.railway.app";
+const prodURL = "https://backend-production-4790.up.railway.app";
 const devURL = "http://10.0.0.0:8000";
 
 export function connect() {
-  return io(devURL);
+  return io(prodURL);
 }
 
 export const SocketProvider = ({ children }: PropsWithChildren) => {

@@ -41,12 +41,12 @@ export default function Home() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       >
-        <Collapsible label="Informações da consulta atual" defaultIsOpen={true}>
+        <Collapsible label="Current procedure information" defaultIsOpen={true}>
           <HospitalProcedureInformation hospitalProcedure={hospitalProcedure} />
           <PatientInformation patient={patient} />
         </Collapsible>
 
-        <Collapsible label="Informações do hospital">
+        <Collapsible label="Hospital information">
           <HospitalInformation hospital={hospital} />
           <DoctorInformation doctor={doctor} />
         </Collapsible>

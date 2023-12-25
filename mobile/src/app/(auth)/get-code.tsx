@@ -22,9 +22,8 @@ export default function GetCodeScreen() {
   const inputStyle = isInputFocused
     ? styles.textInputFocused
     : styles.textInput;
-  const [isConfirmEmailModalVisible, setIsConfirmEmailModalVisible] = useState<
-    boolean
-  >(false);
+  const [isConfirmEmailModalVisible, setIsConfirmEmailModalVisible] =
+    useState<boolean>(false);
   const router = useRouter();
 
   const handleNextStepButtonClick = () => {
@@ -56,7 +55,6 @@ export default function GetCodeScreen() {
       Toast.show({
         type: "error",
         text1: "Erro na autenticação",
-        text2: "Ocorreu um erro ao enviar o código de acesso.",
         topOffset: 70,
       });
 
@@ -74,9 +72,9 @@ export default function GetCodeScreen() {
         style={styles.logo}
         source={require("../../../assets/images/companion_care_logo.png")}
       />
-      <Text style={styles.title}>Digite seu e-mail</Text>
+      <Text style={styles.title}>Type your e-mail</Text>
       <Text style={styles.subtitle}>
-        Insira seu e-mail para receber o código de acesso
+        Type your e-mail to receive the code to access your account
       </Text>
       <TextInput
         value={email}
@@ -100,16 +98,16 @@ export default function GetCodeScreen() {
       >
         <View style={styles.overlay}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalText}>Este email está correto?</Text>
+            <Text style={styles.modalText}>Is this e-mail correct?</Text>
             <Text style={styles.modalEmail}>{email}</Text>
             <View style={styles.modalButtons}>
               <TouchableOpacity
                 onPress={() => setIsConfirmEmailModalVisible(false)}
               >
-                <Text style={styles.modalButtonText}>Editar</Text>
+                <Text style={styles.modalButtonText}>Edit</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={handleConfirmEmail}>
-                <Text style={styles.modalButtonText}>Sim</Text>
+                <Text style={styles.modalButtonText}>Yes</Text>
               </TouchableOpacity>
             </View>
           </View>
