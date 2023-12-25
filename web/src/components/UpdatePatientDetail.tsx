@@ -5,7 +5,7 @@ import { Patient } from "@/entities/Patient";
 import { useHospitalProcedureSocket } from "@/hooks/useHospitalProcedureSocket";
 
 interface UpdatePatientDetailProps {
-  patient: Patient | null;
+  patient?: Patient | null;
   hospitalProcedure: HospitalProcedure | null;
 }
 export function UpdatePatientDetail({

@@ -10,7 +10,7 @@ import {
 } from "@/app/actions";
 
 interface UseHospitalProcedureSocketProps {
-  patient: Patient | null;
+  patient?: Patient | null;
   hospitalProcedure: HospitalProcedure | null;
 }
 export function useHospitalProcedureSocket({

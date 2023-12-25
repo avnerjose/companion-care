@@ -1,7 +1,7 @@
 import { Patient } from "@/entities/Patient";
 
 interface PatientInfoProps {
-  patient: Patient | null;
+  patient?: Patient | null;
 }
 
 export function PatientInfo({ patient }: PatientInfoProps) {
