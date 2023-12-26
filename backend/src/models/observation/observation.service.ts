@@ -41,8 +41,8 @@ export class ObservationService {
       if (companion.notificationToken) {
         this.pushNotification.sendPushNotification({
           token: companion.notificationToken,
-          title: 'Nova observação criada',
-          body: 'O médico criou uma nova observação',
+          title: 'New observation created',
+          body: 'The doctor created a new observation',
           type: 'observation',
         });
       }

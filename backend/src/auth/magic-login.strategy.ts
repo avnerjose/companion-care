@@ -16,12 +16,12 @@ export class MagicLoginStrategy extends PassportStrategy(Strategy) {
       jwt: {
         expiresIn: '150m',
       },
-      callbackUrl: `${process.env.FRONT_END_URL}/auth/login/callback`,
+      callbackUrl: `${process.env.FRONT_END_URL}/login/callback`,
       sendMagicLink: async (email: string, href: string) => {
         await this.emailService.sendEmail({
           email,
-          subject: 'Login na CompanionCare - Médico',
-          text: `Clique no link para fazer login no nosso site: ${href}`,
+          subject: 'CompanionCare Login - Doctor',
+          text: `Click on the link to login to the website: <a href="${href}" target="_blank" >Login</a> `,
         });
       },
       verify: async (payload, callback) => {

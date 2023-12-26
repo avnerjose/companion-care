@@ -76,8 +76,8 @@ export class AuthService {
 
     await this.emailService.sendEmail({
       email,
-      subject: `Login na CompanionCare - Acompanhante - Código: ${uniqueCode}`,
-      text: `Seu código de verificação: ${uniqueCode}`,
+      subject: `CompanionCare login - Companion - Code: ${uniqueCode}`,
+      text: `Your verification code: ${uniqueCode}`,
     });
 
     const hashedCode = await bcrypt.hash(uniqueCode.toString(), 10);
@@ -110,9 +110,6 @@ export class AuthService {
     const companion = await this.companionService.findOneByEmail(email);
     const companionCode =
       await this.verificationCodeService.findOneByCompanionId(companion.id);
-
-    console.log(companion);
-    console.log(companionCode);
 
     if (!companion) {
       throw new UnauthorizedException();
