@@ -67,13 +67,10 @@ export function DoctorProfilePopover() {
             <Button
               className="w-full border-primary-500 text-primary-500"
               variant="outline"
+              onClick={handleLogout}
             >
               Logout
-              <LogOut
-                className="stroke-white"
-                onClick={handleLogout}
-                size={24}
-              />
+              <LogOut className="stroke-white" size={24} />
             </Button>
           </div>
         </div>
