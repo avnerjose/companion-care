@@ -88,11 +88,22 @@ export function LoginForm() {
           <Button type="submit">Log In</Button>
         </form>
       </Form>
-      <div className="flex items-center gap-2">
-        <p>Don&apos;t have an account?</p>
-        <Link href="/sign-up" className="text-primary-500 font-bold">
-          Create a new account
-        </Link>
+      <div>
+        <div className="flex items-center gap-2 max-sm:gap-1 max-sm:text-sm">
+          <p>Don&apos;t have an account?</p>
+          <Link href="/sign-up" className="text-primary-500 font-bold">
+            Create a new account
+          </Link>
+        </div>
+        <div className="flex items-center gap-2 max-sm:gap-1 max-sm:text-sm">
+          <p>Are you a companion?</p>
+          <Link
+            href={process.env.NEXT_PUBLIC_APP_DOWNLOAD ?? ""}
+            className="text-primary-500 font-bold"
+          >
+            Download our app
+          </Link>
+        </div>
       </div>
     </>
   );

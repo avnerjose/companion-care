@@ -384,11 +384,22 @@ export function SignUpForm({ hospitalList }: SignUpFormProps) {
           <Button type="submit">Log In</Button>
         </form>
       </Form>
-      <div className="flex items-center gap-2">
-        <p>Already has an account?</p>
-        <Link href="/login" className="text-primary-500 font-bold">
-          Login to an existing account
-        </Link>
+      <div>
+        <div className="flex items-center gap-2 max-sm:gap-1 max-sm:text-sm">
+          <p>Already has an account?</p>
+          <Link href="/login" className="text-primary-500 font-bold">
+            Login to your account
+          </Link>
+        </div>
+        <div className="flex items-center gap-2 max-sm:gap-1 max-sm:text-sm">
+          <p>Are you a companion?</p>
+          <Link
+            href={process.env.NEXT_PUBLIC_APP_DOWNLOAD ?? ""}
+            className="text-primary-500 font-bold"
+          >
+            Download our app
+          </Link>
+        </div>
       </div>
     </>
   );
