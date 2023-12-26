@@ -30,7 +30,7 @@ const NotificationContext = createContext<NotificationContextProps>(
 
 async function registerForPushNotificationsAsync() {
   let token;
-  if (!Device.isDevice) {
+  if (Device.isDevice) {
     const {
       status: existingStatus,
     } = await Notifications.getPermissionsAsync();
