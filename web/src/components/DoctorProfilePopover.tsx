@@ -65,12 +65,12 @@ export function DoctorProfilePopover() {
             </p>
 
             <Button
-              className="w-full border-primary-500 text-primary-500"
+              className="flex items-center gap-2 w-full border-primary-500 text-primary-500"
               variant="outline"
               onClick={handleLogout}
             >
               Logout
-              <LogOut className="stroke-white" size={24} />
+              <LogOut className="stroke-primary-500" size={24} />
             </Button>
           </div>
         </div>
