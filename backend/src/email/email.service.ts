@@ -19,7 +19,7 @@ export class EmailService {
         },
         to: email,
         subject,
-        text,
+        html: text,
       });
     } catch (e) {
       throw new Error(e);
