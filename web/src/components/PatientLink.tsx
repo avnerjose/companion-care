@@ -7,11 +7,14 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoreHorizontal, Trash, UserCircle } from "lucide-react";
+import { MoreHorizontal, Trash } from "lucide-react";
 import Link from "next/link";
 import { remoteApi } from "@/services/remote-api";
 import { useToast } from "@/components/ui/use-toast";
 import { revalidatePatientsList } from "@/app/actions";
+import MalePatient from "@/assets/icons/patient-M.png";
+import FemalePatient from "@/assets/icons/patient-F.png";
+import Image from "next/image";
 
 interface PatientLinkProps {
   patient: Patient;
@@ -44,7 +47,11 @@ export function PatientLink({ patient }: PatientLinkProps) {
   return (
     <div className="flex flex-col bg-white rounded-md p-5 cursor-pointer">
       <div className="flex items-start justify-between">
-        <UserCircle size={64} className="stroke-primary-500" />
+        <Image
+          className="w-16 h-16"
+          src={patient.sex === "M" ? MalePatient : FemalePatient}
+          alt="Patient icon"
+        />
         <DropdownMenu>
           <DropdownMenuTrigger>
             <MoreHorizontal className="h-4 w-4" />
